@@ -20,6 +20,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText txtEmail;
     private EditText txtPassword;
     private Button btnLogin;
+    private Button btnCreateAccount;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -57,6 +58,17 @@ public class LoginActivity extends AppCompatActivity {
                 );
             }
         });
+
+        btnCreateAccount = (Button) findViewById(R.id.btnCreateAccount);
+        btnCreateAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, CreateUserActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
+
 
 }
