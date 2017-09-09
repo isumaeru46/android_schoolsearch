@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "405049886011",
+    "firebase_url": "https://school-search-f96d4.firebaseio.com",
+    "project_id": "school-search-f96d4",
+    "storage_bucket": "school-search-f96d4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:405049886011:android:09d66520222de73a",
+        "android_client_info": {
+          "package_name": "br.iesb.schoolsearch.schoolsearch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "405049886011-athacacrpd7vp2orb9a9qk5bcflrn3oj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpJnWUapa9cMwdwoLHqXS_7Qi_b2ftu-k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
