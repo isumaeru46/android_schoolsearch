@@ -17,9 +17,10 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class CreateUserActivity extends AppCompatActivity {
 
-    private EditText txtEmail;
-    private EditText txtPassword;
+    private EditText txtEmailCreateUser;
+    private EditText txtPasswordCreateUser;
     private Button btnRegister;
+    private Button btnBackToLogin;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -30,24 +31,25 @@ public class CreateUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_user);
 
 
-        txtEmail = (EditText) findViewById(R.id.txtEmail);
-        txtPassword = (EditText) findViewById(R.id.txtPassword);
+        txtEmailCreateUser = (EditText) findViewById(R.id.txtEmailCreateUser);
+        txtPasswordCreateUser = (EditText) findViewById(R.id.txtPasswordCreateUser);
 
         mAuth = FirebaseAuth.getInstance();
 
-        btnRegister = (Button) findViewById(R.id.btnLogin);
+        btnRegister = (Button) findViewById(R.id.btnRegister);
 
+        btnBackToLogin = (Button) findViewById(R.id.btnBackToLogin);
 
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                mAuth.createUserWithEmailAndPassword(txtEmail.getText().toString(), txtPassword.getText().toString())
+                mAuth.createUserWithEmailAndPassword(txtEmailCreateUser.getText().toString(), txtPasswordCreateUser.getText().toString())
                         .addOnCompleteListener(CreateUserActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (!task.isSuccessful()) {
                                     Toast.makeText(CreateUserActivity.this, "Erro ao cadastrar, tente novamente!", Toast.LENGTH_SHORT).show();
-                                }else{
+                                } else {
                                     FirebaseUser user = task.getResult().getUser();
                                     if (user != null) {
                                         Intent intent = new Intent(CreateUserActivity.this, MainActivity.class);
@@ -58,6 +60,14 @@ public class CreateUserActivity extends AppCompatActivity {
 
                             }
                         });
+            }
+        });
+
+        btnBackToLogin.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(CreateUserActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
