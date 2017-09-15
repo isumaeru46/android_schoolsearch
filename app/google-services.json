@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "405049886011-6dn0a510j04mi0evcn9m069mj965b55k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.iesb.schoolsearch.schoolsearch",
+            "certificate_hash": "1119104fc3f388f1990ab70dd845f15413d33234"
+          }
+        },
+        {
           "client_id": "405049886011-athacacrpd7vp2orb9a9qk5bcflrn3oj.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "405049886011-athacacrpd7vp2orb9a9qk5bcflrn3oj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
