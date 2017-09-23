@@ -55,6 +55,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         findViewById(R.id.sign_in_button).setOnClickListener(this);
         findViewById(R.id.btnLogin).setOnClickListener(this);
+        findViewById(R.id.btnCreateAccount).setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -107,23 +108,29 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 txtEmail = (EditText) findViewById(R.id.txtEmail);
                 txtPassword = (EditText) findViewById(R.id.txtPassword);
 
-                mAuth.signInWithEmailAndPassword(txtEmail.getText().toString(), txtPassword.getText().toString()).addOnCompleteListener(
-                        LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (!task.isSuccessful()) {
-                                    Toast.makeText(LoginActivity.this, "E-mail ou senha incorretos!", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    FirebaseUser user = task.getResult().getUser();
-                                    if (user != null) {
-                                        Intent intent = new Intent(LoginActivity.this, TelaPrincipalActivity.class);
-                                        startActivity(intent);
-                                        finish();
+                if(txtEmail != null && !txtEmail.getText().toString().isEmpty() && txtPassword != null && !txtPassword.getText().toString().isEmpty()){
+                    mAuth.signInWithEmailAndPassword(txtEmail.getText().toString(), txtPassword.getText().toString()).addOnCompleteListener(
+                            LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (!task.isSuccessful()) {
+                                        Toast.makeText(LoginActivity.this, "E-mail ou senha incorretos!", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        FirebaseUser user = task.getResult().getUser();
+                                        if (user != null) {
+                                            Intent intent = new Intent(LoginActivity.this, TelaPrincipalActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
                                     }
                                 }
                             }
-                        }
-                );
+                    );
+                }else{
+                    Toast.makeText(LoginActivity.this, "Login e senha obrigatórios!", Toast.LENGTH_SHORT).show();
+                }
+
+
                 break;
             case R.id.btnCreateAccount:
                 Intent intent = new Intent(LoginActivity.this, CreateUserActivity.class);
