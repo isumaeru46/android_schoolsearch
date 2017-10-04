@@ -3,6 +3,9 @@ package br.iesb.schoolsearch.schoolsearch.activities;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,11 +16,26 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import br.iesb.schoolsearch.schoolsearch.R;
+import br.iesb.schoolsearch.schoolsearch.adapter.RecyclerViewAdapter;
+import br.iesb.schoolsearch.schoolsearch.interfaces.RetrofitInterface;
+import br.iesb.schoolsearch.schoolsearch.models.EscolaModel;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class TelaPrincipalActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +50,7 @@ public class TelaPrincipalActivity extends AppCompatActivity implements Navigati
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
 
@@ -44,6 +62,35 @@ public class TelaPrincipalActivity extends AppCompatActivity implements Navigati
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        recyclerView = (RecyclerView) findViewById(R.id.recycler);
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(RetrofitInterface.ENDPOINT).addConverterFactory(GsonConverterFactory.create()).build();
+
+        RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
+
+        Call<List<EscolaModel>> call = retrofitInterface.callListEscolas();
+
+        call.enqueue(new retrofit2.Callback<List<EscolaModel>>(){
+            @Override
+            public void onResponse(Call<List<EscolaModel>> call, Response<List<EscolaModel>> response) {
+                if(response.isSuccessful()){
+                    List<EscolaModel> listaEscolas = new ArrayList<EscolaModel>();
+                    for(EscolaModel estabelecimento : response.body())
+                        listaEscolas.add(estabelecimento);
+
+                    recyclerView.setAdapter(new RecyclerViewAdapter(listaEscolas, TelaPrincipalActivity.this));
+                }
+                else{
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<EscolaModel>> call, Throwable t) {
+            }
+        });
+
+        RecyclerView.LayoutManager layout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layout);
 
 
     }
