@@ -1,7 +1,9 @@
-package br.iesb.schoolsearch.schoolsearch;
+package br.iesb.schoolsearch.schoolsearch.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import br.iesb.schoolsearch.schoolsearch.R;
 
 public class MainActivity extends AppCompatActivity {
 

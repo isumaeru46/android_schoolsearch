@@ -1,10 +1,12 @@
-package br.iesb.schoolsearch.schoolsearch;
+package br.iesb.schoolsearch.schoolsearch.activities;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
+
+import br.iesb.schoolsearch.schoolsearch.R;
 
 public class SplashActivity extends AppCompatActivity {
 
