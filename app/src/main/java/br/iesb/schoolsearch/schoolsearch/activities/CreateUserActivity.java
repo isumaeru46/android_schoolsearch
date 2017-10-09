@@ -60,7 +60,7 @@ public class CreateUserActivity extends AppCompatActivity {
                                         } else {
                                             FirebaseUser user = task.getResult().getUser();
                                             if (user != null) {
-                                                Intent intent = new Intent(CreateUserActivity.this, MainActivity.class);
+                                                Intent intent = new Intent(CreateUserActivity.this, TelaPrincipalActivity.class);
                                                 startActivity(intent);
                                                 finish();
                                             }
