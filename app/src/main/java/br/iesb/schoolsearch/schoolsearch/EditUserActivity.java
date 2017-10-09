@@ -25,6 +25,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import java.net.URL;
 
 import br.iesb.schoolsearch.schoolsearch.activities.CreateUserActivity;
+import br.iesb.schoolsearch.schoolsearch.activities.LoginActivity;
 import br.iesb.schoolsearch.schoolsearch.activities.MainActivity;
 import br.iesb.schoolsearch.schoolsearch.activities.TelaPrincipalActivity;
 
@@ -44,7 +45,7 @@ public class EditUserActivity extends AppCompatActivity {
         txtTelefoneUpdateUser = (EditText) findViewById(R.id.txtTelefoneUpdateUser);
         txtNomeUpdateUser = (EditText) findViewById(R.id.txtNomeUpdateUser);
         downloadedImg = (ImageView) findViewById(R.id.imageView);
-        btnUpdate = (Button) findViewById(R.id.btnRegister);
+        btnUpdate = (Button) findViewById(R.id.btnUpdateUser);
 
 
         new ImageDownloader().execute(downloadUrl);
@@ -109,5 +110,15 @@ public class EditUserActivity extends AppCompatActivity {
             //sharedpreferences.edit().putBoolean("isDownloading", false);
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        FirebaseAuth fAuth = FirebaseAuth.getInstance();
+        fAuth.signOut();
+        Intent intent = new Intent(EditUserActivity.this, TelaPrincipalActivity.class);
+        startActivity(intent);
+        finish();
+        //super.onBackPressed();
     }
 }
