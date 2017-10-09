@@ -1,4 +1,4 @@
-package br.iesb.schoolsearch.schoolsearch.adapter;
+package br.iesb.schoolsearch.schoolsearch.holders;
 
 
 import android.support.v7.widget.RecyclerView;
@@ -9,8 +9,8 @@ import br.iesb.schoolsearch.schoolsearch.R;
 
 public class RecyclerViewHolder extends RecyclerView.ViewHolder{
 
-    final TextView nome;
-    final TextView codEscola;
+    public final TextView nome;
+    public final TextView codEscola;
 
     public RecyclerViewHolder(View view) {
         super(view);

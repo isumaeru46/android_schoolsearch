@@ -1,4 +1,4 @@
-package br.iesb.schoolsearch.schoolsearch.adapter;
+package br.iesb.schoolsearch.schoolsearch.adapters;
 
 
 import android.content.Context;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import br.iesb.schoolsearch.schoolsearch.holders.RecyclerViewHolder;
 import br.iesb.schoolsearch.schoolsearch.R;
 import br.iesb.schoolsearch.schoolsearch.models.EscolaModel;
 
