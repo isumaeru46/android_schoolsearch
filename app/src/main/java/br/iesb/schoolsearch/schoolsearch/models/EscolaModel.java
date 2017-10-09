@@ -13,18 +13,13 @@ public class EscolaModel {
     private String seConveniadaSetorPublico;
     private String zona;
 
-    private Long codEscola;
-    private Long latitude;
-    private Long longitude;
-    private Long qtdSalasExistentes;
-    private Long qtdSalasUtilizadas;
-    private Long qtdFuncionarios;
-    private Long qtdComputadores;
-    private Long qtdComputadoresPorAluno;
-    private Long qtdAlunos;
-
-    private EnderecoEscolaModel endereco;
-    private InfraestruturaEscolaModel infraestrutura;
+    private String codEscola;
+    private String latitude;
+    private String longitude;
+    private String qtdSalasExistentes;
+    private String qtdSalasUtilizadas;
+    private String qtdFuncionarios;
+    private String qtdComputadores;
 
     public String getNome() {
         return nome;
@@ -98,75 +93,75 @@ public class EscolaModel {
         this.zona = zona;
     }
 
-    public Long getCodEscola() {
+    public String getCodEscola() {
         return codEscola;
     }
 
-    public void setCodEscola(Long codEscola) {
+    public void setCodEscola(String codEscola) {
         this.codEscola = codEscola;
     }
 
-    public Long getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Long latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
-    public Long getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Long longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
-    public Long getQtdSalasExistentes() {
+    public String getQtdSalasExistentes() {
         return qtdSalasExistentes;
     }
 
-    public void setQtdSalasExistentes(Long qtdSalasExistentes) {
+    public void setQtdSalasExistentes(String qtdSalasExistentes) {
         this.qtdSalasExistentes = qtdSalasExistentes;
     }
 
-    public Long getQtdSalasUtilizadas() {
+    public String getQtdSalasUtilizadas() {
         return qtdSalasUtilizadas;
     }
 
-    public void setQtdSalasUtilizadas(Long qtdSalasUtilizadas) {
+    public void setQtdSalasUtilizadas(String qtdSalasUtilizadas) {
         this.qtdSalasUtilizadas = qtdSalasUtilizadas;
     }
 
-    public Long getQtdFuncionarios() {
+    public String getQtdFuncionarios() {
         return qtdFuncionarios;
     }
 
-    public void setQtdFuncionarios(Long qtdFuncionarios) {
+    public void setQtdFuncionarios(String qtdFuncionarios) {
         this.qtdFuncionarios = qtdFuncionarios;
     }
 
-    public Long getQtdComputadores() {
+    public String getQtdComputadores() {
         return qtdComputadores;
     }
 
-    public void setQtdComputadores(Long qtdComputadores) {
+    public void setQtdComputadores(String qtdComputadores) {
         this.qtdComputadores = qtdComputadores;
     }
 
-    public Long getQtdComputadoresPorAluno() {
+    public String getQtdComputadoresPorAluno() {
         return qtdComputadoresPorAluno;
     }
 
-    public void setQtdComputadoresPorAluno(Long qtdComputadoresPorAluno) {
+    public void setQtdComputadoresPorAluno(String qtdComputadoresPorAluno) {
         this.qtdComputadoresPorAluno = qtdComputadoresPorAluno;
     }
 
-    public Long getQtdAlunos() {
+    public String getQtdAlunos() {
         return qtdAlunos;
     }
 
-    public void setQtdAlunos(Long qtdAlunos) {
+    public void setQtdAlunos(String qtdAlunos) {
         this.qtdAlunos = qtdAlunos;
     }
 
@@ -185,6 +180,13 @@ public class EscolaModel {
     public void setInfraestrutura(InfraestruturaEscolaModel infraestrutura) {
         this.infraestrutura = infraestrutura;
     }
+
+    private String qtdComputadoresPorAluno;
+    private String qtdAlunos;
+
+    private EnderecoEscolaModel endereco;
+    private InfraestruturaEscolaModel infraestrutura;
+
 
 
 }

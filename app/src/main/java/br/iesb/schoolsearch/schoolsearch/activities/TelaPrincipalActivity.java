@@ -1,5 +1,7 @@
 package br.iesb.schoolsearch.schoolsearch.activities;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -64,20 +67,29 @@ public class TelaPrincipalActivity extends AppCompatActivity implements Navigati
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(RetrofitInterface.ENDPOINT).addConverterFactory(GsonConverterFactory.create()).build();
+        Gson gson = new GsonBuilder().setLenient().create();
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(RetrofitInterface.ENDPOINT).addConverterFactory(GsonConverterFactory.create(gson)).build();
 
         RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
 
         Call<List<EscolaModel>> call = retrofitInterface.callListEscolas();
+
+        final ProgressDialog progressDoalog;
+        progressDoalog = new ProgressDialog(TelaPrincipalActivity.this);
+        progressDoalog.setMax(100);
+        progressDoalog.setMessage("Buscando escolas");
+        progressDoalog.show();
 
         call.enqueue(new retrofit2.Callback<List<EscolaModel>>(){
             @Override
             public void onResponse(Call<List<EscolaModel>> call, Response<List<EscolaModel>> response) {
                 if(response.isSuccessful()){
                     List<EscolaModel> listaEscolas = new ArrayList<EscolaModel>();
-                    for(EscolaModel estabelecimento : response.body())
+                    for(EscolaModel estabelecimento : response.body()) {
                         listaEscolas.add(estabelecimento);
-
+                    }
+                    progressDoalog.dismiss();
                     recyclerView.setAdapter(new RecyclerViewAdapter(listaEscolas, TelaPrincipalActivity.this));
                 }
                 else{
@@ -97,12 +109,12 @@ public class TelaPrincipalActivity extends AppCompatActivity implements Navigati
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+        FirebaseAuth fAuth = FirebaseAuth.getInstance();
+        fAuth.signOut();
+        Intent intent = new Intent(TelaPrincipalActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+        //super.onBackPressed();
     }
 
     @Override

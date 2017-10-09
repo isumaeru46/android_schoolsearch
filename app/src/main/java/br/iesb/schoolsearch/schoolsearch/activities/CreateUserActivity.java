@@ -21,6 +21,7 @@ public class CreateUserActivity extends AppCompatActivity {
 
     private EditText txtEmailCreateUser;
     private EditText txtPasswordCreateUser;
+    private EditText txtPasswordConfirmCreateUser;
     private Button btnRegister;
     private Button btnBackToLogin;
 
@@ -32,9 +33,9 @@ public class CreateUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
 
-
         txtEmailCreateUser = (EditText) findViewById(R.id.txtEmailCreateUser);
         txtPasswordCreateUser = (EditText) findViewById(R.id.txtPasswordCreateUser);
+        txtPasswordConfirmCreateUser = (EditText) findViewById(R.id.txtPasswordConfirmCreateUser);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -42,26 +43,37 @@ public class CreateUserActivity extends AppCompatActivity {
 
         btnBackToLogin = (Button) findViewById(R.id.btnBackToLogin);
 
-
         btnRegister.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                mAuth.createUserWithEmailAndPassword(txtEmailCreateUser.getText().toString(), txtPasswordCreateUser.getText().toString())
-                        .addOnCompleteListener(CreateUserActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (!task.isSuccessful()) {
-                                    Toast.makeText(CreateUserActivity.this, "Erro ao cadastrar, tente novamente!", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    FirebaseUser user = task.getResult().getUser();
-                                    if (user != null) {
-                                        Intent intent = new Intent(CreateUserActivity.this, MainActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                    }
-                                }
 
-                            }
-                        });
+                if(txtEmailCreateUser != null && !txtEmailCreateUser.getText().toString().isEmpty()
+                        && txtPasswordCreateUser != null && !txtPasswordCreateUser.getText().toString().isEmpty()
+                        && txtPasswordConfirmCreateUser != null && !txtPasswordConfirmCreateUser.getText().toString().isEmpty()){
+
+                    if(txtPasswordCreateUser.getText().toString().equals(txtPasswordConfirmCreateUser.getText().toString())){
+                        mAuth.createUserWithEmailAndPassword(txtEmailCreateUser.getText().toString(), txtPasswordCreateUser.getText().toString())
+                                .addOnCompleteListener(CreateUserActivity.this, new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if (!task.isSuccessful()) {
+                                            Toast.makeText(CreateUserActivity.this, "Erro ao cadastrar, tente novamente!", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            FirebaseUser user = task.getResult().getUser();
+                                            if (user != null) {
+                                                Intent intent = new Intent(CreateUserActivity.this, MainActivity.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                        }
+
+                                    }
+                                });
+                    }else{
+                        Toast.makeText(CreateUserActivity.this, "Senha e confirmação tem que ser iguais!", Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    Toast.makeText(CreateUserActivity.this, "Todos campos obrigatórios!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
