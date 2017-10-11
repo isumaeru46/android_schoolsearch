@@ -1,4 +1,4 @@
-package br.iesb.schoolsearch.schoolsearch;
+package br.iesb.schoolsearch.schoolsearch.activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -24,10 +24,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.net.URL;
 
-import br.iesb.schoolsearch.schoolsearch.activities.CreateUserActivity;
-import br.iesb.schoolsearch.schoolsearch.activities.LoginActivity;
-import br.iesb.schoolsearch.schoolsearch.activities.MainActivity;
-import br.iesb.schoolsearch.schoolsearch.activities.TelaPrincipalActivity;
+import br.iesb.schoolsearch.schoolsearch.R;
 
 public class EditUserActivity extends AppCompatActivity {
 
@@ -114,11 +111,11 @@ public class EditUserActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        FirebaseAuth fAuth = FirebaseAuth.getInstance();
+        /*FirebaseAuth fAuth = FirebaseAuth.getInstance();
         fAuth.signOut();
         Intent intent = new Intent(EditUserActivity.this, TelaPrincipalActivity.class);
         startActivity(intent);
-        finish();
-        //super.onBackPressed();
+        finish();*/
+        super.onBackPressed();
     }
 }

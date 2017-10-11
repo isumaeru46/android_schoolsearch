@@ -23,7 +23,6 @@ import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.iesb.schoolsearch.schoolsearch.EditUserActivity;
 import br.iesb.schoolsearch.schoolsearch.R;
 import br.iesb.schoolsearch.schoolsearch.adapters.RecyclerViewAdapter;
 import br.iesb.schoolsearch.schoolsearch.interfaces.RetrofitInterface;
