@@ -1,31 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/linha"
     android:layout_width="fill_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:padding="6dip" >
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="61dp"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_row="0"
+        app:srcCompat="@drawable/images"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+
+    <TextView
+        android:id="@+id/nomeEscola"
+        android:layout_width="106dp"
+        android:layout_height="25dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_toEndOf="@+id/imageView2"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:text="Nome Escola"
+        android:textSize="16sp" />
+
+
     <TextView
         android:id="@+id/codEscola"
-        android:layout_width="fill_parent"
-        android:layout_height="26dip"
+        android:layout_width="164dp"
+        android:layout_height="25dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/imageView2"
+        android:layout_weight="1"
         android:ellipsize="marquee"
         android:maxLines="1"
         android:text="Código escola"
         android:textSize="12sp" />
 
-    <TextView
-        android:id="@+id/nomeEscola"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/codEscola"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignWithParentIfMissing="true"
-        android:gravity="center_vertical"
-        android:text="Nome Escola"
-        android:textSize="16sp" />
+
 
 </RelativeLayout>
