@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -27,22 +28,28 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter{
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.row_recycler_view, parent, false);
 
-        RecyclerViewHolder holder = new RecyclerViewHolder(view);
+        RecyclerViewHolder holder = new RecyclerViewHolder(view, context);
 
         return holder;
     }
-
 
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         RecyclerViewHolder holder = (RecyclerViewHolder) viewHolder;
 
-        EscolaModel escola = listaDeEscolas.get(position);
+        final EscolaModel escola = listaDeEscolas.get(viewHolder.getAdapterPosition());
 
         holder.nome.setText(escola.getNome());
         holder.codEscola.setText(escola.getCodEscola().toString());
+        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Position "+ escola.getEmail(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
 
     @Override
     public int getItemCount() {

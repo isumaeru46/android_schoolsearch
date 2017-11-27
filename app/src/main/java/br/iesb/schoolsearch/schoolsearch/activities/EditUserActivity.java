@@ -41,7 +41,7 @@ public class EditUserActivity extends AppCompatActivity {
 
         txtTelefoneUpdateUser = (EditText) findViewById(R.id.txtTelefoneUpdateUser);
         txtNomeUpdateUser = (EditText) findViewById(R.id.txtNomeUpdateUser);
-        downloadedImg = (ImageView) findViewById(R.id.imageView);
+        //downloadedImg = (ImageView) findViewById(R.id.imageViewUpdateUser);
         btnUpdate = (Button) findViewById(R.id.btnUpdateUser);
 
 
@@ -102,7 +102,9 @@ public class EditUserActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Bitmap result) {
             Log.i("ASYNCTASK", "onPostExecute Called");
-            downloadedImg.setImageBitmap(result);
+
+            //downloadedImg.setImageBitmap(result);
+
             //simpleWaitDialog.dismiss();
             //sharedpreferences.edit().putBoolean("isDownloading", false);
         }

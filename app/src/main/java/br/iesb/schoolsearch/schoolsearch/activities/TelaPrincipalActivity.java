@@ -36,6 +36,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class TelaPrincipalActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private RecyclerView recyclerView;
+    private RecyclerViewAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +88,8 @@ public class TelaPrincipalActivity extends AppCompatActivity implements Navigati
                         listaEscolas.add(estabelecimento);
                     }
                     progressDoalog.dismiss();
-                    recyclerView.setAdapter(new RecyclerViewAdapter(listaEscolas, TelaPrincipalActivity.this));
+                    mAdapter = new RecyclerViewAdapter(listaEscolas, TelaPrincipalActivity.this);
+                    recyclerView.setAdapter(mAdapter);
                 }
                 else{
                 }
@@ -97,6 +99,7 @@ public class TelaPrincipalActivity extends AppCompatActivity implements Navigati
             public void onFailure(Call<List<EscolaModel>> call, Throwable t) {
             }
         });
+
 
         RecyclerView.LayoutManager layout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layout);
