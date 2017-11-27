@@ -2,6 +2,8 @@ package br.iesb.schoolsearch.schoolsearch.adapters;
 
 
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import br.iesb.schoolsearch.schoolsearch.Fragments.EditNameDialogFragment;
 import br.iesb.schoolsearch.schoolsearch.holders.RecyclerViewHolder;
 import br.iesb.schoolsearch.schoolsearch.R;
 import br.iesb.schoolsearch.schoolsearch.models.EscolaModel;
@@ -28,7 +31,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter{
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.row_recycler_view, parent, false);
 
-        RecyclerViewHolder holder = new RecyclerViewHolder(view, context);
+        RecyclerViewHolder holder = new RecyclerViewHolder(view);
 
         return holder;
     }
@@ -46,8 +49,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter{
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "Position "+ escola.getEmail(), Toast.LENGTH_SHORT).show();
+                showEditDialog();
+
             }
         });
+    }
+
+    private void showEditDialog() {
+        FragmentManager fm = ((FragmentActivity) context).getSupportFragmentManager();
+        EditNameDialogFragment editNameDialogFragment = EditNameDialogFragment.newInstance("Some Title");
+        editNameDialogFragment.show(fm, "fragment_edit_name");
     }
 
 
