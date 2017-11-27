@@ -49,15 +49,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter{
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "Position "+ escola.getEmail(), Toast.LENGTH_SHORT).show();
-                showEditDialog();
+                showEditDialog(escola);
 
             }
         });
     }
 
-    private void showEditDialog() {
+    private void showEditDialog(EscolaModel escola) {
         FragmentManager fm = ((FragmentActivity) context).getSupportFragmentManager();
-        EditNameDialogFragment editNameDialogFragment = EditNameDialogFragment.newInstance("Some Title");
+        EditNameDialogFragment editNameDialogFragment = EditNameDialogFragment.newInstance(escola);
         editNameDialogFragment.show(fm, "fragment_edit_name");
     }
 
