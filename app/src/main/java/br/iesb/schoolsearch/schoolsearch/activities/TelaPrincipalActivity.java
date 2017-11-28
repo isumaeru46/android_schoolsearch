@@ -2,24 +2,36 @@ package br.iesb.schoolsearch.schoolsearch.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +50,10 @@ public class TelaPrincipalActivity extends AppCompatActivity implements Navigati
     private RecyclerView recyclerView;
     private RecyclerViewAdapter mAdapter;
 
+    private TextView textViewEmailUser;
+    private TextView textViewNameUser;
+    private ImageView imageViewPhotoUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,21 +63,36 @@ public class TelaPrincipalActivity extends AppCompatActivity implements Navigati
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-            }
-        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
         navigationView.setNavigationItemSelectedListener(this);
+
+       /* textViewEmailUser = (TextView) navigationView.findViewById(R.id.textViewEmailUser);
+        textViewNameUser = (TextView) findViewById(R.id.textViewNameUser);
+        imageViewPhotoUser = (ImageView) findViewById(R.id.imageViewPhotoUser);
+        Uri photoUrl = null;
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
+            textViewNameUser.setText(user.getDisplayName(), TextView.BufferType.EDITABLE);
+            textViewEmailUser.setText(user.getEmail(), TextView.BufferType.EDITABLE);
+
+            photoUrl = user.getPhotoUrl();
+        }
+
+        if(photoUrl != null){
+            new DownloadImage().execute(photoUrl.toString());
+        }else{
+            new DownloadImage().execute("https://crackberry.com/sites/crackberry.com/files/styles/large/public/topic_images/2013/ANDROID.png");
+        }
+*/
+
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
 
@@ -91,8 +122,6 @@ public class TelaPrincipalActivity extends AppCompatActivity implements Navigati
                     mAdapter = new RecyclerViewAdapter(listaEscolas, TelaPrincipalActivity.this);
                     recyclerView.setAdapter(mAdapter);
                 }
-                else{
-                }
             }
 
             @Override
@@ -100,10 +129,8 @@ public class TelaPrincipalActivity extends AppCompatActivity implements Navigati
             }
         });
 
-
         RecyclerView.LayoutManager layout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layout);
-
 
     }
 
@@ -137,21 +164,61 @@ public class TelaPrincipalActivity extends AppCompatActivity implements Navigati
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_manage) {
             Intent intent = new Intent(TelaPrincipalActivity.this, EditUserActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_share) {
+        } /*else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
 
-        }
+        }*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void setImage(Drawable drawable)
+    {
+        imageViewPhotoUser.setImageDrawable(drawable);
+    }
+
+    public class DownloadImage extends AsyncTask<String, Integer, Drawable> {
+
+        @Override
+        protected Drawable doInBackground(String... arg0) {
+            return downloadImage(arg0[0]);
+        }
+
+        protected void onPostExecute(Drawable image)
+        {
+            setImage(image);
+        }
+
+        private Drawable downloadImage(String _url)
+        {
+            URL url;
+            InputStream in;
+            BufferedInputStream buf;
+            try {
+                url = new URL(_url);
+                in = url.openStream();
+                buf = new BufferedInputStream(in);
+                Bitmap bMap = BitmapFactory.decodeStream(buf);
+                if (in != null) {
+                    in.close();
+                }
+                if (buf != null) {
+                    buf.close();
+                }
+                return new BitmapDrawable(bMap);
+            } catch (Exception e) {
+                Log.e("Error reading file", e.toString());
+            }
+            return null;
+        }
     }
 
 
