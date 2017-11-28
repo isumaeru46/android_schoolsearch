@@ -58,7 +58,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter{
     private void showEditDialog(EscolaModel escola) {
         FragmentManager fm = ((FragmentActivity) context).getSupportFragmentManager();
         EditNameDialogFragment editNameDialogFragment = EditNameDialogFragment.newInstance(escola);
-        editNameDialogFragment.show(fm, "fragment_edit_name");
+        editNameDialogFragment.show(fm, "fragment_view_escola");
     }
 
 
