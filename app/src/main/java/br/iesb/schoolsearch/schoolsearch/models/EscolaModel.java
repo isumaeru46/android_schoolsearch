@@ -1,7 +1,9 @@
 package br.iesb.schoolsearch.schoolsearch.models;
 
 
-public class EscolaModel {
+import java.io.Serializable;
+
+public class EscolaModel implements Serializable{
 
     private String nome;
     private String rede;
@@ -185,6 +187,7 @@ public class EscolaModel {
     private String qtdAlunos;
 
     private EnderecoEscolaModel endereco;
+
     private InfraestruturaEscolaModel infraestrutura;
 
 

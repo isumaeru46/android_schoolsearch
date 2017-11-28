@@ -1,6 +1,8 @@
 package br.iesb.schoolsearch.schoolsearch.models;
 
-public class InfraestruturaEscolaModel {
+import java.io.Serializable;
+
+public class InfraestruturaEscolaModel implements Serializable{
 
 
     private String temQuadraEsporteCoberta;

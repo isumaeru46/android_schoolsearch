@@ -3,6 +3,7 @@ package br.iesb.schoolsearch.schoolsearch.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,12 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.List;
 
-import br.iesb.schoolsearch.schoolsearch.Fragments.EditNameDialogFragment;
-import br.iesb.schoolsearch.schoolsearch.activities.LoginActivity;
+import br.iesb.schoolsearch.schoolsearch.Fragments.ViewEscolaDialogFragment;
 import br.iesb.schoolsearch.schoolsearch.activities.MapsActivity;
-import br.iesb.schoolsearch.schoolsearch.activities.TelaPrincipalActivity;
 import br.iesb.schoolsearch.schoolsearch.holders.RecyclerViewHolder;
 import br.iesb.schoolsearch.schoolsearch.R;
 import br.iesb.schoolsearch.schoolsearch.models.EscolaModel;
@@ -53,9 +53,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter{
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "Position "+ escola.getEmail(), Toast.LENGTH_SHORT).show();
-                context.startActivity(new Intent(context, MapsActivity.class));
+                //Intent intent = new Intent(context, MapsActivity.class);
+                /*Bundle bundle = new Bundle();
+                bundle.putSerializable("escola",escola);
+                intent.putExtras(bundle);*/
+                //intent.putExtra("escola", escola);
+                //intent.putExtra("latitude", escola.getLatitude());
+                //intent.putExtra("longitude", escola.getLongitude());
+                //intent.putExtra("nomeEscola", escola.getNome());
+                //context.startActivity(intent);
 
-                //showEditDialog(escola);
+                showEditDialog(escola);
 
             }
         });
@@ -63,7 +71,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter{
 
     private void showEditDialog(EscolaModel escola) {
         FragmentManager fm = ((FragmentActivity) context).getSupportFragmentManager();
-        EditNameDialogFragment editNameDialogFragment = EditNameDialogFragment.newInstance(escola);
+        ViewEscolaDialogFragment editNameDialogFragment = ViewEscolaDialogFragment.newInstance(escola);
         editNameDialogFragment.show(fm, "fragment_view_escola");
     }
 

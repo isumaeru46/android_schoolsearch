@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.design.widget.NavigationView;
@@ -20,8 +21,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -68,20 +71,21 @@ public class TelaPrincipalActivity extends AppCompatActivity implements Navigati
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView nav = (NavigationView)findViewById(R.id.nav_view);
+        View navigationView = nav.getHeaderView(0);
 
-        navigationView.setNavigationItemSelectedListener(this);
+        nav.setNavigationItemSelectedListener(this);
 
-       /* textViewEmailUser = (TextView) navigationView.findViewById(R.id.textViewEmailUser);
-        textViewNameUser = (TextView) findViewById(R.id.textViewNameUser);
-        imageViewPhotoUser = (ImageView) findViewById(R.id.imageViewPhotoUser);
+        textViewEmailUser = (AppCompatTextView) navigationView.findViewById(R.id.textViewEmailUser);
+        textViewNameUser = (AppCompatTextView) navigationView.findViewById(R.id.textViewNameUser);
+        imageViewPhotoUser = (ImageView) navigationView.findViewById(R.id.imageViewPhotoUser);
         Uri photoUrl = null;
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
-            textViewNameUser.setText(user.getDisplayName(), TextView.BufferType.EDITABLE);
-            textViewEmailUser.setText(user.getEmail(), TextView.BufferType.EDITABLE);
+            textViewEmailUser.setText(user.getEmail());
+            textViewNameUser.setText(user.getDisplayName());
 
             photoUrl = user.getPhotoUrl();
         }
@@ -91,7 +95,7 @@ public class TelaPrincipalActivity extends AppCompatActivity implements Navigati
         }else{
             new DownloadImage().execute("https://crackberry.com/sites/crackberry.com/files/styles/large/public/topic_images/2013/ANDROID.png");
         }
-*/
+
 
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
@@ -119,8 +123,10 @@ public class TelaPrincipalActivity extends AppCompatActivity implements Navigati
                         listaEscolas.add(estabelecimento);
                     }
                     progressDoalog.dismiss();
+
                     mAdapter = new RecyclerViewAdapter(listaEscolas, TelaPrincipalActivity.this);
                     recyclerView.setAdapter(mAdapter);
+
                 }
             }
 

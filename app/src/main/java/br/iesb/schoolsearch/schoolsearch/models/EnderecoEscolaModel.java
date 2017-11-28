@@ -1,6 +1,8 @@
 package br.iesb.schoolsearch.schoolsearch.models;
 
-public class EnderecoEscolaModel {
+import java.io.Serializable;
+
+public class EnderecoEscolaModel implements Serializable{
 
     private String cep;
     private String descricao;

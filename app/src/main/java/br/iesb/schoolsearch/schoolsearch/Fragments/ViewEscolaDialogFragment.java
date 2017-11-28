@@ -13,13 +13,13 @@ import android.widget.EditText;
 import br.iesb.schoolsearch.schoolsearch.R;
 import br.iesb.schoolsearch.schoolsearch.models.EscolaModel;
 
-public class EditNameDialogFragment extends DialogFragment {
+public class ViewEscolaDialogFragment extends DialogFragment {
 
-    public EditNameDialogFragment() {
+    public ViewEscolaDialogFragment() {
     }
 
-    public static EditNameDialogFragment newInstance(EscolaModel escola) {
-        EditNameDialogFragment frag = new EditNameDialogFragment();
+    public static ViewEscolaDialogFragment newInstance(EscolaModel escola) {
+        ViewEscolaDialogFragment frag = new ViewEscolaDialogFragment();
         Bundle args = new Bundle();
         args.putString("title", escola.getNome());
         frag.setArguments(args);
@@ -28,7 +28,25 @@ public class EditNameDialogFragment extends DialogFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_view_escola, container);
+        View v = inflater.inflate(R.layout.fragment_view_escola, container);
+        return v;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getDialog().getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.MATCH_PARENT);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(DialogFragment.STYLE_NORMAL, getTheme());
+    }
+
+    @Override
+    public int getTheme() {
+        return R.style.full_screen_dialog;
     }
 
     @Override
@@ -42,6 +60,7 @@ public class EditNameDialogFragment extends DialogFragment {
         getDialog().setTitle(title);
         // Show soft keyboard automatically and request focus to field
         mEditText.requestFocus();
+        getDialog().getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
     }
 
