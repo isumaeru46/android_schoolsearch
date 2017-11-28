@@ -2,6 +2,7 @@ package br.iesb.schoolsearch.schoolsearch.adapters;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,9 @@ import android.widget.Toast;
 import java.util.List;
 
 import br.iesb.schoolsearch.schoolsearch.Fragments.EditNameDialogFragment;
+import br.iesb.schoolsearch.schoolsearch.activities.LoginActivity;
+import br.iesb.schoolsearch.schoolsearch.activities.MapsActivity;
+import br.iesb.schoolsearch.schoolsearch.activities.TelaPrincipalActivity;
 import br.iesb.schoolsearch.schoolsearch.holders.RecyclerViewHolder;
 import br.iesb.schoolsearch.schoolsearch.R;
 import br.iesb.schoolsearch.schoolsearch.models.EscolaModel;
@@ -49,7 +53,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter{
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "Position "+ escola.getEmail(), Toast.LENGTH_SHORT).show();
-                showEditDialog(escola);
+                context.startActivity(new Intent(context, MapsActivity.class));
+
+                //showEditDialog(escola);
 
             }
         });
