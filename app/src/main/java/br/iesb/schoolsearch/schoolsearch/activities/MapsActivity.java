@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -60,9 +61,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         if(escola != null){
-            LatLng escolaMapa = new LatLng( new Double(escola.getLatitude()),new Double(escola.getLongitude()));
-            mMap.addMarker(new MarkerOptions().position(escolaMapa).title(escola.getNome()));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(escolaMapa, 15));
+            if(escola.getLatitude() != null && escola.getLongitude() != null){
+                LatLng escolaMapa = new LatLng( new Double(escola.getLatitude()),new Double(escola.getLongitude()));
+                mMap.addMarker(new MarkerOptions().position(escolaMapa).title(escola.getNome()));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(escolaMapa, 15));
+            }else{
+                Toast.makeText(this,"Erro ao pegar localização", Toast.LENGTH_LONG);
+            }
+        }else{
+            Toast.makeText(this,"Erro ao pegar localização", Toast.LENGTH_LONG);
         }
 
     }
