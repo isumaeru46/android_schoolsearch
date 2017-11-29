@@ -17,6 +17,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.ByteArrayOutputStream;
+import java.sql.Timestamp;
+import java.util.Calendar;
 
 import br.iesb.schoolsearch.schoolsearch.R;
 import br.iesb.schoolsearch.schoolsearch.models.EscolaModel;
@@ -81,8 +83,8 @@ public class ShowPhotosActivity extends AppCompatActivity {
         String imageEncoded = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
         DatabaseReference ref = FirebaseDatabase.getInstance()
                 .getReference("escolas")
-                //.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .child(escola.getCodEscola())
+                .child(String.valueOf(Calendar.getInstance().getTimeInMillis()))
                 .child("imageUrl");
         ref.setValue(imageEncoded);
     }
