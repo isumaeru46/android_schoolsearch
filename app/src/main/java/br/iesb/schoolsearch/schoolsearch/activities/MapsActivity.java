@@ -55,9 +55,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             getLocation();
         }
 
-        LatLng escolaMapa = new LatLng( new Double(escola.getLatitude()),new Double(escola.getLongitude()));
-        mMap.addMarker(new MarkerOptions().position(escolaMapa).title(escola.getNome()));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(escolaMapa, 15));
+        if(escola != null){
+            LatLng escolaMapa = new LatLng( new Double(escola.getLatitude()),new Double(escola.getLongitude()));
+            mMap.addMarker(new MarkerOptions().position(escolaMapa).title(escola.getNome()));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(escolaMapa, 15));
+        }
 
     }
 

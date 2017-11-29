@@ -1,6 +1,7 @@
 package br.iesb.schoolsearch.schoolsearch.Fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import br.iesb.schoolsearch.schoolsearch.R;
+import br.iesb.schoolsearch.schoolsearch.activities.MapsActivity;
 import br.iesb.schoolsearch.schoolsearch.models.EscolaModel;
 
 public class ViewEscolaDialogFragment extends DialogFragment {
@@ -48,6 +50,11 @@ public class ViewEscolaDialogFragment extends DialogFragment {
         buttonMaps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Intent intent = new Intent(getActivity().getApplicationContext(), MapsActivity.class);
+                intent.putExtra("escola", escola);
+                getActivity().getApplicationContext().startActivity(intent);
+
                 Toast.makeText(getActivity().getApplicationContext(),"teste",Toast.LENGTH_SHORT);
             }
         });
@@ -67,7 +74,6 @@ public class ViewEscolaDialogFragment extends DialogFragment {
                 Toast.makeText(getActivity().getApplicationContext(),"teste",Toast.LENGTH_SHORT);
             }
         });
-
 
         return v;
     }
@@ -101,6 +107,7 @@ public class ViewEscolaDialogFragment extends DialogFragment {
         if(escola.getEmail() != null){
             lblEmailEscola.setText(escola.getEmail());
         }
+
         lblEnderecoEscola = (TextView) view.findViewById(R.id.lblEnderecoEscola);
         if(escola.getEndereco() != null) {
             lblEnderecoEscola.setText(escola.getEndereco().toString());
