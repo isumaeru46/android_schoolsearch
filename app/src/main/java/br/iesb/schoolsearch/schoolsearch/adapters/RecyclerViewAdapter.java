@@ -52,7 +52,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter{
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Position "+ escola.getEmail(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "Position "+ escola.getEmail(), Toast.LENGTH_SHORT).show();
                 //Intent intent = new Intent(context, MapsActivity.class);
                 /*Bundle bundle = new Bundle();
                 bundle.putSerializable("escola",escola);

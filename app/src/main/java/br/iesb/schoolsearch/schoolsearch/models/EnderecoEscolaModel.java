@@ -49,4 +49,16 @@ public class EnderecoEscolaModel implements Serializable{
     public void setUf(String uf) {
         this.uf = uf;
     }
+
+
+    @Override
+    public String toString() {
+        String logradouro = getDescricao() != null ? getDescricao().trim() : "";
+        String bairro = getBairro() != null ? getBairro().trim() : "";
+        String cidade = getMunicipio() != null ? getMunicipio().trim() : "";
+        String uf = getUf() != null ? getUf().trim() : "";
+        String cep = getCep() != null ? getCep().trim() : "";
+
+        return "Logradouro: " + logradouro + "\nBairro: " + bairro + "\nCidade: " + cidade + " - " + uf + "\nCep: " + cep;
+    }
 }

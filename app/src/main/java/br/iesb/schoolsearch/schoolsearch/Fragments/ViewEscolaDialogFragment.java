@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import br.iesb.schoolsearch.schoolsearch.R;
@@ -17,8 +18,16 @@ import br.iesb.schoolsearch.schoolsearch.models.EscolaModel;
 
 public class ViewEscolaDialogFragment extends DialogFragment {
 
-    private Button teste;
     private EscolaModel escola;
+
+    private TextView lblNomeEscola;
+    private TextView lblEmailEscola;
+    private TextView lblEnderecoEscola;
+
+    private Button buttonMaisInformacoes;
+    private Button buttonMaps;
+    private Button buttonFotos;
+
 
     public ViewEscolaDialogFragment() {
     }
@@ -27,7 +36,6 @@ public class ViewEscolaDialogFragment extends DialogFragment {
         ViewEscolaDialogFragment frag = new ViewEscolaDialogFragment();
         Bundle args = new Bundle();
         args.putSerializable("escola",escola);
-        //args.putString("title", escola.getNome());
         frag.setArguments(args);
         return frag;
     }
@@ -36,14 +44,30 @@ public class ViewEscolaDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_view_escola, container);
 
-        teste = (Button) v.findViewById(R.id.buttonMaps);
-
-        teste.setOnClickListener(new View.OnClickListener() {
+        buttonMaps = (Button) v.findViewById(R.id.buttonMaps);
+        buttonMaps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity().getApplicationContext(),"teste",Toast.LENGTH_SHORT);
             }
         });
+
+        buttonMaisInformacoes = (Button) v.findViewById(R.id.buttonMaisInformacoes);
+        buttonMaisInformacoes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity().getApplicationContext(),"teste",Toast.LENGTH_SHORT);
+            }
+        });
+
+        buttonFotos = (Button) v.findViewById(R.id.buttonFotos);
+        buttonFotos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity().getApplicationContext(),"teste",Toast.LENGTH_SHORT);
+            }
+        });
+
 
         return v;
     }
@@ -69,15 +93,19 @@ public class ViewEscolaDialogFragment extends DialogFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // Get field from view
-        EditText mEditText;
-        mEditText = (EditText) view.findViewById(R.id.txt_your_name);
-        mEditText.setText(escola.getNome());
-        // Fetch arguments from bundle and set title
-        String title = getArguments().getString("title", "Enter Name");
-        getDialog().setTitle(title);
-        // Show soft keyboard automatically and request focus to field
-        mEditText.requestFocus();
+
+        lblNomeEscola = (TextView) view.findViewById(R.id.lblNomeEscola);
+        lblNomeEscola.setText(escola.getNome());
+
+        lblEmailEscola = (TextView) view.findViewById(R.id.lblEmailEscola);
+        if(escola.getEmail() != null){
+            lblEmailEscola.setText(escola.getEmail());
+        }
+        lblEnderecoEscola = (TextView) view.findViewById(R.id.lblEnderecoEscola);
+        if(escola.getEndereco() != null) {
+            lblEnderecoEscola.setText(escola.getEndereco().toString());
+        }
+
         //getDialog().getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
     }
