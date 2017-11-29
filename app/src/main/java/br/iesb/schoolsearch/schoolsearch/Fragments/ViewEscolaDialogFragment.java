@@ -2,9 +2,12 @@ package br.iesb.schoolsearch.schoolsearch.Fragments;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +17,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.ByteArrayOutputStream;
+
 import br.iesb.schoolsearch.schoolsearch.R;
 import br.iesb.schoolsearch.schoolsearch.activities.MapsActivity;
+import br.iesb.schoolsearch.schoolsearch.activities.ShowPhotosActivity;
 import br.iesb.schoolsearch.schoolsearch.models.EscolaModel;
 
 public class ViewEscolaDialogFragment extends DialogFragment {
+
+    private static final int REQUEST_IMAGE_CAPTURE = 111;
 
     private EscolaModel escola;
 
@@ -55,7 +67,6 @@ public class ViewEscolaDialogFragment extends DialogFragment {
                 intent.putExtra("escola", escola);
                 getActivity().getApplicationContext().startActivity(intent);
 
-                Toast.makeText(getActivity().getApplicationContext(),"teste",Toast.LENGTH_SHORT);
             }
         });
 
@@ -71,7 +82,9 @@ public class ViewEscolaDialogFragment extends DialogFragment {
         buttonFotos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity().getApplicationContext(),"teste",Toast.LENGTH_SHORT);
+                Intent intent = new Intent(getActivity().getApplicationContext(), ShowPhotosActivity.class);
+                intent.putExtra("escola", escola);
+                getActivity().getApplicationContext().startActivity(intent);
             }
         });
 
@@ -113,10 +126,7 @@ public class ViewEscolaDialogFragment extends DialogFragment {
             lblEnderecoEscola.setText(escola.getEndereco().toString());
         }
 
-        //getDialog().getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
     }
-
-
 
 }

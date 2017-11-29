@@ -61,7 +61,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyD_7UkzWupV5bWI3FTA0E5vZHsvQrSN7co" />
 
-        <activity android:name=".activities.UploadFotosActivity"></activity>
+        <activity android:name=".activities.UploadFotosActivity" />
+        <activity android:name=".activities.TakePhotoActivity" />
+        <activity android:name=".activities.ShowPhotosActivity"></activity>
     </application>
 
 </manifest>
