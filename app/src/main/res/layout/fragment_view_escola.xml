@@ -44,28 +44,42 @@
         android:ems="10"
         android:inputType="textMultiLine" />
 
-    <Button
-        android:layout_marginTop="60px"
-        android:id="@+id/buttonMaisInformacoes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Mais Informações"
-        android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"/>
 
-    <Button
-        android:layout_marginTop="30px"
-        android:id="@+id/buttonMaps"
+    <LinearLayout
+        android:id="@+id/viewButtonsEscola"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Localização"
-        android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"/>
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_margin="15dp" >
 
-    <Button
-        android:layout_marginTop="30px"
-        android:id="@+id/buttonFotos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"
-        android:text="Fotos" />
+        <Button
+            android:layout_marginTop="20dp"
+            android:id="@+id/buttonMaisInformacoes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mais Informações"
+            android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"/>
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:id="@+id/buttonMaps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Localização"
+            android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"/>
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:id="@+id/buttonFotos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"
+            android:text="Fotos" />
+
+
+    </LinearLayout>
+
+
 
 </LinearLayout>
